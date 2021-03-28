@@ -1,0 +1,685 @@
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven-publish'
+
+ext {
+	springVersion                = "5.2.9.RELEASE"
+	springBootVersion            = "2.3.4.RELEASE"
+	springDataVersion            = "2.3.4.RELEASE"
+	springRabbitVersion          = "2.2.11.RELEASE"
+	springSecurityVersion        = "5.4.0"
+	springSessionVersion         = "2.3.1.RELEASE"
+	springWsVersion              = "3.0.10.RELEASE"
+
+	jpaVersion                   = "2.2"
+	hibernateVersion             = "5.4.21.Final"
+	hibernateValidatorVersion    = "6.1.5.Final"
+
+	hikariVersion                = "3.4.5"
+	druidVersion                 = "1.1.24"
+	c3p0Version                  = "0.9.5.5"
+
+	h2Version                    = "1.4.200"
+	mysqlVersion                 = "5.1.39"
+	oracleVersion                = "11.2.0.3"
+
+	liquibaseVersion             = "4.1.0"
+
+	aliyunOSSVersion             = "3.11.1"
+	amqpClientVersion            = "5.9.0"
+	asmVersion                   = "9.0"
+	aspectjVersion               = "1.9.6"
+	barcode4jVersion             = "2.1"
+	caffeineVersion              = "2.8.5"
+	commonsCollections4Version   = "4.4"
+	commonsCompressVersion       = "1.20"
+	commonsFileUploadVersion     = "1.4"
+	commonsIoVersion             = "2.8.0"
+	commonsLangVersion           = "2.6"
+	disruptorVersion             = "3.4.2"
+	dom4jVersion                 = "2.1.3"
+	findbugVersion               = "3.0.2"
+	httpclientVersion            = "4.5.12"
+	itextAsianVersion            = "5.2.0"
+	itextpdfVersion              = "5.5.13.2"
+	jacksonVersion               = "2.11.2"
+	javaxServletVersion          = "4.0.1"
+	javassistVersion             = "3.27.0-GA"
+	javatuplesVersion            = "1.2"
+	jgitVersion                  = "5.9.0.202009080501-r"
+	jsonVersion                  = "20200518"
+	lombokVersion                = "1.18.12"
+	mvel2Version                 = "2.4.10.Final"
+	pinyin4jVersion              = "2.5.1"
+	poiVersion                   = "4.1.2"
+	poiOoxmlSchemasVersion       = "1.4"
+	protobufVersion              = "3.9.2"
+	quartzVersion                = "2.3.2"
+	redissonVersion              = "3.13.5"
+	rhinoVersion                 = "1.7.13"
+	sshdCoreVersion              = "2.5.1"
+	swaggerVersion               = "3.0.0"
+	IntegerVersion                  = "4.0.1"
+
+	slf4jVersion                 = "1.7.30"
+	log4jVersion                 = "2.11.2"
+
+	junit5JupiterVersion         = "5.7.0"
+	junit5PlatformVersion        = "1.7.0"
+	junit5VintageVersion         = "5.7.0"
+	mockitoVersion               = "3.5.13"
+
+	/* mk */
+	aminoVersion                 = "3.1.0.alpha18"
+	bcpTypeVersion               = "3.1.0.alpha10"
+	bcpStoreVersion              = "3.1.0.alpha13"
+	bcpAdvancedQueryVersion      = "3.1.0.alpha07"
+	bcpScriptVersion             = "3.1.0.alpha03"
+	bcpSerialVersion             = "3.1.0.alpha05"
+	bap2BillVersion              = "3.1.0.alpha05"
+
+	/* libs */
+	lib = [
+		/* springframework */
+		spring_aop:                   "org.springframework:spring-aop:${springVersion}",
+		spring_aspects:               "org.springframework:spring-aspects:${springVersion}",
+		spring_beans:                 "org.springframework:spring-beans:${springVersion}",
+		spring_context:               "org.springframework:spring-context:${springVersion}",
+		spring_context_indexer:       "org.springframework:spring-context-indexer:${springVersion}",
+		spring_context_support:       "org.springframework:spring-context-support:${springVersion}",
+		spring_core:                  "org.springframework:spring-core:${springVersion}",
+		spring_expression:            "org.springframework:spring-expression:${springVersion}",
+		spring_framework_bom:         "org.springframework:spring-framework-bom:${springVersion}",
+		spring_instrument:            "org.springframework:spring-instrument:${springVersion}",
+		spring_jcl:                   "org.springframework:spring-jcl:${springVersion}",
+		spring_jdbc:                  "org.springframework:spring-jdbc:${springVersion}",
+		spring_jms:                   "org.springframework:spring-jms:${springVersion}",
+		spring_messaging:             "org.springframework:spring-messaging:${springVersion}",
+		spring_orm:                   "org.springframework:spring-orm:${springVersion}",
+		spring_oxm:                   "org.springframework:spring-oxm:${springVersion}",
+		spring_test:                  "org.springframework:spring-test:${springVersion}",
+		spring_tx:                    "org.springframework:spring-tx:${springVersion}",
+		spring_web:                   "org.springframework:spring-web:${springVersion}",
+		spring_webflux:               "org.springframework:spring-webflux:${springVersion}",
+		spring_webmvc:                "org.springframework:spring-webmvc:${springVersion}",
+		spring_websocket:             "org.springframework:spring-websocket:${springVersion}",
+
+
+		/* springboot */
+		spring_boot:                            "org.springframework.boot:spring-boot:${springBootVersion}",
+		spring_boot_actuator:                   "org.springframework.boot:spring-boot-actuator:${springBootVersion}",
+		spring_boot_actuator_autoconfigure:     "org.springframework.boot:spring-boot-actuator-autoconfigure:${springBootVersion}",
+		spring_boot_autoconfigure:              "org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}",
+		spring_boot_configuration_metadata:     "org.springframework.boot:spring-boot-configuration-metadata:${springBootVersion}",
+		spring_boot_configuration_processor:    "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}",
+		spring_boot_dependencies:               "org.springframework.boot:spring-boot-dependencies:${springBootVersion}",
+		spring_boot_starter:                    "org.springframework.boot:spring-boot-starter:${springBootVersion}",
+		spring_boot_starter_actuator:           "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}",
+		spring_boot_starter_amqp:               "org.springframework.boot:spring-boot-starter-amqp:${springBootVersion}",
+		spring_boot_starter_aop:                "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}",
+		spring_boot_starter_data_redis:         "org.springframework.boot:spring-boot-starter-data-redis:${springBootVersion}",
+		spring_boot_starter_jdbc:               "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}",
+		spring_boot_starter_json:               "org.springframework.boot:spring-boot-starter-json:${springBootVersion}",
+		spring_boot_starter_log4j2:             "org.springframework.boot:spring-boot-starter-log4j2:${springBootVersion}",
+		spring_boot_starter_mail:               "org.springframework.boot:spring-boot-starter-mail:${springBootVersion}",
+		spring_boot_starter_security:           "org.springframework.boot:spring-boot-starter-security:${springBootVersion}",
+		spring_boot_starter_test:               "org.springframework.boot:spring-boot-starter-test:${springBootVersion}",
+		spring_boot_starter_tomcat:             "org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}",
+		spring_boot_starter_web:                "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+		spring_boot_starter_web_services:       "org.springframework.boot:spring-boot-starter-web-services:${springBootVersion}",
+		spring_boot_starter_websocket:          "org.springframework.boot:spring-boot-starter-websocket:${springBootVersion}",
+
+		/* spring security */
+		spring_security_core:         "org.springframework.security:spring-security-core:${springSecurityVersion}",
+		spring_security_config:       "org.springframework.security:spring-security-config:${springSecurityVersion}",
+		spring_security_web:          "org.springframework.security:spring-security-web:${springSecurityVersion}",
+
+		/* spring session */
+		spring_session:               "org.springframework.session:spring-session:${springSessionVersion}",
+		spring_session_core:          "org.springframework.session:spring-session-core:${springSessionVersion}",
+		spring_session_redis:         "org.springframework.session:spring-session-data-redis:${springSessionVersion}",
+
+		/* spring data */
+		spring_data_redis:            "org.springframework.data:spring-data-redis:${springDataVersion}",
+		spring_data_common:           "org.springframework.data:spring-data-commons:${springDataVersion}",
+
+		/* spring rabbit */
+		spring_rabbit:                "org.springframework.amqp:spring-rabbit:${springRabbitVersion}",
+
+		/* spring web services */
+		spring_ws_core:               "org.springframework.ws:spring-ws-core:${springWsVersion}",
+
+		/* hibernate */
+		jpa:                          "javax.persistence:javax.persistence-api:${jpaVersion}",
+		hibernate_core:               "org.hibernate:hibernate-core:${hibernateVersion}",
+		hibernate_c3p0:               "org.hibernate:hibernate-c3p0:${hibernateVersion}",
+		hibernate_validator:          "org.hibernate:hibernate-validator:${hibernateValidatorVersion}",
+
+		/* connection pool */
+		druid:                        "com.alibaba:druid:${druidVersion}",
+		hikari:                       "com.zaxxer:HikariCP:${hikariVersion}",
+		c3p0:                         "com.mchange:c3p0:${c3p0Version}",
+
+		/* db */
+		h2:                           "com.h2database:h2:${h2Version}",
+		mysql_connector:              "mysql:mysql-connector-java:${mysqlVersion}",
+		oracle_jdbc:                  "com.oracle:ojdbc6:${oracleVersion}",
+
+		/* db merge tool */
+		liquibase:                    "org.liquibase:liquibase-core:${liquibaseVersion}",
+
+		/* libs */
+		aliyunOSS:                        "com.aliyun.oss:aliyun-sdk-oss:${aliyunOSSVersion}",
+		amqp_client:                      "com.rabbitmq:amqp-client:${amqpClientVersion}",
+		asm:                              "org.ow2.asm:asm:${asmVersion}",
+		aspectj:                          "org.aspectj:aspectjweaver:${aspectjVersion}",
+		barcode4j:                        "net.sf.barcode4j:barcode4j:${barcode4jVersion}",
+		caffeine:                         "com.github.ben-manes.caffeine:caffeine:${caffeineVersion}",
+		commons_collections4:             "org.apache.commons:commons-collections4:${commonsCollections4Version}",
+		commons_compress:                 "org.apache.commons:commons-compress:${commonsCompressVersion}",
+		commons_fileupload:               "commons-fileupload:commons-fileupload:${commonsFileUploadVersion}",
+		commons_io:                       "commons-io:commons-io:${commonsIoVersion}",
+		commons_lang:                     "commons-lang:commons-lang:${commonsLangVersion}",
+		disruptor:                        "com.lmax:disruptor:${disruptorVersion}",
+		dom4j:                            "org.dom4j:dom4j:${dom4jVersion}",
+		findbug_jsr305:                   "com.google.code.findbugs:jsr305:${findbugVersion}",
+		httpclient:                       "org.apache.httpcomponents:httpclient:${httpclientVersion}",
+		itext_asian:                      "com.itextpdf:itext-asian:${itextAsianVersion}",
+		itextpdf:                         "com.itextpdf:itextpdf:${itextpdfVersion}",
+		jackson_annotations:              "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
+		jackson_core:                     "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+		jackson_databind:                 "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+		jackson_datatype_jdk8:            "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${jacksonVersion}",
+		jackson_datatype_jsr310:          "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}",
+		jackson_dataformat_xml:           "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}",
+		java_Integer_generator:              "com.fasterxml.Integer:java-Integer-generator:${IntegerVersion}",
+		javassist:                        "org.javassist:javassist:${javassistVersion}",
+		javatuples:                       "org.javatuples:javatuples:${javatuplesVersion}",
+		javax_servlet_api:                "javax.servlet:javax.servlet-api:${javaxServletVersion}",
+		jgit:                             "org.eclipse.jgit:org.eclipse.jgit:${jgitVersion}",
+		json:                             "org.json:json:${jsonVersion}",
+		lombok:                           "org.projectlombok:lombok:${lombokVersion}",
+		mvel:                             "org.mvel:mvel2:${mvel2Version}",
+		pinyin4j:                         "com.belerweb:pinyin4j:${pinyin4jVersion}",
+		poi:                              "org.apache.poi:poi:${poiVersion}",
+		poi_ooxml:                        "org.apache.poi:poi-ooxml:${poiVersion}",
+		poi_ooxml_schemas:                "org.apache.poi:poi-ooxml-schemas:${poiVersion}",
+		poi_ooxml_schemas_xml:            "org.apache.poi:ooxml-schemas:${poiOoxmlSchemasVersion}",
+		protobuff_java:                   "com.google.protobuf:protobuf-java:${protobufVersion}",
+		quartz:                           "org.quartz-scheduler:quartz:${quartzVersion}",
+		quartz_jobs:                      "org.quartz-scheduler:quartz-jobs:${quartzVersion}",
+		redisson:                         "org.redisson:redisson:${redissonVersion}",
+		redisson_spring_boot_starter:     "org.redisson:redisson-spring-boot-starter:${redissonVersion}",
+		rhino:                            "org.mozilla:rhino:${rhinoVersion}",
+		sshd_core:                        "org.apache.sshd:sshd-core:${sshdCoreVersion}",
+		springfox_swagger2:               "io.springfox:springfox-swagger2:${swaggerVersion}",
+		springfox_swagger_ui:             "io.springfox:springfox-swagger-ui:${swaggerVersion}",
+
+		/* log */
+		slf4j_api:                        "org.slf4j:slf4j-api:${slf4jVersion}",
+		log4j_core:                       "org.apache.logging.log4j:log4j-core:${log4jVersion}",
+		log4j_web:                        "org.apache.logging.log4j:log4j-web:${log4jVersion}",
+
+		/* testing */
+		junit5_jupiter_api:               "org.junit.jupiter:junit-jupiter-api:${junit5JupiterVersion}",
+		junit5_jupiter_engine:            "org.junit.jupiter:junit-jupiter-engine:${junit5JupiterVersion}",
+		junit5_platform_launcher:         "org.junit.platform:junit-platform-launcher:${junit5PlatformVersion}",
+		junit5_platform_runner:           "org.junit.platform:junit-platform-runner:${junit5PlatformVersion}",
+		junit5_vintage_engine:            "org.junit.vintage:junit-vintage-engine:${junit5VintageVersion}",
+		mockito_core:                     "org.mockito:mockito-core:${mockitoVersion}",
+		mockito_junit_jupiter:            "org.mockito:mockito-junit-jupiter:${mockitoVersion}",
+	]
+
+	/* nvwa */
+	nvwa = [
+		/* core */
+		module_manager:           "com.jiuqi.nvwa.core:module.manager:1.0.3",
+		np_cache:                 "com.jiuqi.nvwa.core:np.cache:1.4.0",
+		np_core:                  "com.jiuqi.nvwa.core:np.core:1.3.0",
+		np_core_support:          "com.jiuqi.nvwa.core:np.core.support:1.3.0",
+		np_user:                  "com.jiuqi.nvwa.core:np.user:1.3.12",
+		np_user_api:              "com.jiuqi.nvwa.core:np.user.api:1.3.12",
+		np_user_impl:             "com.jiuqi.nvwa.core:np.user.impl:1.3.12",
+
+		/* component */
+		va_mapper:                "com.jiuqi.nvwa.component.datamapper:va-mapper:1.0.2",
+
+		/* framework */
+		np_authz2:                "com.jiuqi.nvwa.framework:np.authz2:1.3.1-SNAPSHOT",
+		np_authz2_api:            "com.jiuqi.nvwa.framework:np.authz2.api:1.3.1-SNAPSHOT",
+		np_authz2_impl:           "com.jiuqi.nvwa.framework:np.authz2.impl:1.3.1-SNAPSHOT",
+		np_blob:                  "com.jiuqi.nvwa.framework:np.blob:1.5.0",
+		np_dataengine:            "com.jiuqi.nvwa.framework:np.dataengine:1.3.3",
+		np_definition:            "com.jiuqi.nvwa.framework:np.definition:1.6.2",
+		np_i18n:                  "com.jiuqi.nvwa.framework:np.i18n:1.3.3",
+		np_licence:               "com.jiuqi.nvwa.framework:np.licence:1.3.0-SNAPSHOT",  
+		np_log:                   "com.jiuqi.nvwa.framework:np.log:1.3.1",
+		np_log_log4j2:            "com.jiuqi.nvwa.framework:np.log.log4j2:1.3.1",
+		np_message:               "com.jiuqi.nvwa.framework:np.message:1.3.10",
+		np_sql:                   "com.jiuqi.nvwa.framework:np.sql:1.3.0-SNAPSHOT",
+		np_sql_spring:            "com.jiuqi.nvwa.framework:np.sql.spring:1.3.0-SNAPSHOT",
+
+		/* utils */
+		np_lib:                   "com.jiuqi.nvwa.utils:np.lib:1.3.0-SNAPSHOT",
+
+		/* tenant */
+		np_tenant:                "com.jiuqi.nvwa.np:np.tenant:0.15.0-SNAPSHOT"
+	]
+
+	/* gov */
+	gov = [
+		common_advanced_query:                "com.jiuqi.gov:common.advanced.query:1.0.0-SNAPSHOT",
+		common_advanced_query_hb:             "com.jiuqi.gov:common.advanced.query.hb:1.0.0-SNAPSHOT",
+		common_base:                          "com.jiuqi.gov:common.base:1.0.0-SNAPSHOT",
+		common_biztype:                       "com.jiuqi.gov:common.biztype:1.0.0-SNAPSHOT",
+		common_context:                       "com.jiuqi.gov:common.context:1.0.0-SNAPSHOT",
+		common_context_np:                    "com.jiuqi.gov:common.context.np:1.0.0-SNAPSHOT",
+		common_context_nvwa:                  "com.jiuqi.gov:common.context.nvwa:1.0.0-SNAPSHOT",
+		common_metadata:                      "com.jiuqi.gov:common.metadata:1.0.0-SNAPSHOT",
+		common_metadata_bean:                 "com.jiuqi.gov:common.metadata.bean:1.0.0-SNAPSHOT",
+		common_metadata_resources:            "com.jiuqi.gov:common.metadata.resources:1.0.0-SNAPSHOT",
+		common_serial:                        "com.jiuqi.gov:common.serial:1.0.0-SNAPSHOT",
+		common_sequence:                      "com.jiuqi.gov:common.sequence:1.0.0-SNAPSHOT",
+		common_sequence_hb:                   "com.jiuqi.gov:common.sequence.hb:1.0.0-SNAPSHOT",
+		common_starter_store:                 "com.jiuqi.gov:common.starter.store:1.0.0-SNAPSHOT",
+		common_starter_store_nvwa:            "com.jiuqi.gov:common.starter.store.nvwa:1.0.0-SNAPSHOT",
+		common_store_core:                    "com.jiuqi.gov:common.store.core:1.0.0-SNAPSHOT",
+		common_store_hb:                      "com.jiuqi.gov:common.store.hb:1.0.0-SNAPSHOT",
+		common_store_npsql:                   "com.jiuqi.gov:common.store.npsql:1.0.0-SNAPSHOT",
+		common_syntax:                        "com.jiuqi.gov:common.syntax:1.0.0-SNAPSHOT",
+		common_type:                          "com.jiuqi.gov:common.type:1.0.0-SNAPSHOT",
+		common_type_support_javascript:       "com.jiuqi.gov:common.type.support.javascript:1.0.0-SNAPSHOT",
+		common_type_support_json:             "com.jiuqi.gov:common.type.support.json:1.0.0-SNAPSHOT",
+
+		gms_bill:                             "com.jiuqi.gov:gms.bill:1.0.0-SNAPSHOT",
+		gms_dev:                              "com.jiuqi.gov:gms.dev:1.0.0-SNAPSHOT",
+	]
+
+	/* mk */
+	mk = [
+		/* amino */
+		amino_amqp:                   "com.jiuqi.mk:amino.amqp:${aminoVersion}",
+		amino_boot:                   "com.jiuqi.mk:amino.boot:${aminoVersion}",
+		amino_boot_web:               "com.jiuqi.mk:amino.boot.web:${aminoVersion}",
+		amino_common:                 "com.jiuqi.mk:amino.common:${aminoVersion}",
+		amino_core:                   "com.jiuqi.mk:amino.core:${aminoVersion}",
+		amino_dev:                    "com.jiuqi.mk:amino.dev:${aminoVersion}",
+		amino_tenant:                 "com.jiuqi.mk:amino.tenant:${aminoVersion}",
+		amino_tenant_liquibase:       "com.jiuqi.mk:amino.tenant.liquibase:${aminoVersion}",
+		
+		/* bcp */
+		bcp_type:                     "com.jiuqi.mk:bcp.type:${bcpTypeVersion}",
+		bcp_type_dev:                 "com.jiuqi.mk:bcp.type.dev:${bcpTypeVersion}",
+		bcp_type_support_json:        "com.jiuqi.mk:bcp.type.support.json:${bcpTypeVersion}",
+
+		bcp_store:                    "com.jiuqi.mk:bcp.store:${bcpStoreVersion}",
+		bcp_store_tenant:             "com.jiuqi.mk:bcp.store.tenant:${bcpStoreVersion}",
+		mk_starter_store:             "com.jiuqi.mk:mk.starter.store:${bcpStoreVersion}",
+		mk_starter_store_nvwa:        "com.jiuqi.mk:mk.starter.store.nvwa:${bcpStoreVersion}",
+		mk_starter_store_tenant:      "com.jiuqi.mk:mk.starter.store.tenant:${bcpStoreVersion}",
+
+		bcp_advanced_query:           "com.jiuqi.mk:bcp.advanced.query:${bcpAdvancedQueryVersion}",
+		bcp_advanced_query_dev:       "com.jiuqi.mk:bcp.advanced.query.dev:${bcpAdvancedQueryVersion}",
+		bcp_script:                   "com.jiuqi.mk:bcp.script:${bcpScriptVersion}",
+		bcp_serial:                   "com.jiuqi.mk:bcp.serial:${bcpSerialVersion}",
+		bcp_serial_dev:               "com.jiuqi.mk:bcp.serial.dev:${bcpSerialVersion}",
+
+		bap2_bill:                    "com.jiuqi.mk:bap2.bill:${bap2BillVersion}",
+		bap2_bill_dev:                "com.jiuqi.mk:bap2.bill.dev:${bap2BillVersion}",
+	]
+
+}
+
+configurations.all {it ->
+	resolutionStrategy {
+		/* springframework */
+		force lib.spring_aop
+		force lib.spring_aspects
+		force lib.spring_beans
+		force lib.spring_context
+		force lib.spring_context_indexer
+		force lib.spring_context_support
+		force lib.spring_core
+		force lib.spring_expression
+		force lib.spring_framework_bom
+		force lib.spring_instrument
+		force lib.spring_jcl
+		force lib.spring_jdbc
+		force lib.spring_jms
+		force lib.spring_messaging
+		force lib.spring_orm
+		force lib.spring_oxm
+		force lib.spring_test
+		force lib.spring_tx
+		force lib.spring_web
+		force lib.spring_webflux
+		force lib.spring_webmvc
+		force lib.spring_websocket
+
+		/* springboot */
+		force lib.spring_boot
+		force lib.spring_boot_actuator
+		force lib.spring_boot_actuator_autoconfigure
+		force lib.spring_boot_autoconfigure
+		force lib.spring_boot_configuration_metadata
+		force lib.spring_boot_configuration_processor
+		force lib.spring_boot_dependencies
+		force lib.spring_boot_starter
+		force lib.spring_boot_starter_actuator
+		force lib.spring_boot_starter_amqp
+		force lib.spring_boot_starter_aop
+		force lib.spring_boot_starter_data_redis
+		force lib.spring_boot_starter_jdbc
+		force lib.spring_boot_starter_json
+		force lib.spring_boot_starter_log4j2
+		force lib.spring_boot_starter_mail
+		force lib.spring_boot_starter_security
+		force lib.spring_boot_starter_test
+		force lib.spring_boot_starter_tomcat
+		force lib.spring_boot_starter_web
+		force lib.spring_boot_starter_web_services
+		force lib.spring_boot_starter_websocket
+
+		/* spring security */
+		force lib.spring_security_core
+		force lib.spring_security_config
+		force lib.spring_security_web
+
+		/* spring session */
+		force lib.spring_session
+		force lib.spring_session_core
+		force lib.spring_session_redis
+
+		/* spring data */
+		force lib.spring_data_redis
+		force lib.spring_data_common
+
+		/* spring rabbit */
+		force lib.spring_rabbit
+
+		/* spring web services */
+		force lib.spring_ws_core
+
+		/* hibernate */
+		force lib.jpa
+		force lib.hibernate_core
+		force lib.hibernate_c3p0
+		force lib.hibernate_validator
+
+		/* connection pool */
+		force lib.hikari
+		force lib.druid
+		force lib.c3p0
+
+		/* db */
+		force lib.h2
+		force lib.mysql_connector
+		force lib.oracle_jdbc
+
+		/* db merge tool */
+		force lib.liquibase
+
+		/* libs */
+		force lib.aliyunOSS
+		force lib.amqp_client
+		force lib.asm
+		force lib.aspectj
+		force lib.barcode4j
+		force lib.caffeine
+		force lib.commons_collections4
+		force lib.commons_compress
+		force lib.commons_fileupload
+		force lib.commons_io
+		force lib.commons_lang
+		force lib.disruptor
+		force lib.dom4j
+		force lib.findbug_jsr305
+		force lib.httpclient
+		force lib.itext_asian
+		force lib.itextpdf
+		force lib.jackson_annotations
+		force lib.jackson_core
+		force lib.jackson_databind
+		force lib.jackson_datatype_jdk8
+		force lib.jackson_datatype_jsr310
+		force lib.jackson_dataformat_xml
+		force lib.java_Integer_generator
+		force lib.javassist
+		force lib.javatuples
+		force lib.javax_servlet_api
+		force lib.jgit
+		force lib.json
+		force lib.lombok
+		force lib.mvel
+		force lib.pinyin4j
+		force lib.poi
+		force lib.poi_ooxml
+		force lib.poi_ooxml_schemas
+		force lib.poi_ooxml_schemas_xml
+		force lib.protobuff_java
+		force lib.quartz
+		force lib.quartz_jobs
+		force lib.redisson
+		force lib.redisson_spring_boot_starter
+		force lib.rhino
+		force lib.sshd_core
+		force lib.springfox_swagger2
+		force lib.springfox_swagger_ui
+
+		/* log */
+		force lib.slf4j_api
+		force lib.log4j_core
+		force lib.log4j_web
+
+		/* testing */
+		force lib.junit5_jupiter_api
+		force lib.junit5_jupiter_engine
+		force lib.junit5_platform_launcher
+		force lib.junit5_platform_runner
+		force lib.junit5_vintage_engine
+		force lib.mockito_core
+		force lib.mockito_junit_jupiter
+
+		/* nvwa */
+		/* core */
+		force nvwa.module_manager
+		force nvwa.np_cache
+		force nvwa.np_core
+		force nvwa.np_core_support
+		force nvwa.np_user
+		force nvwa.np_user_api
+		force nvwa.np_user_impl
+		/* component */
+		force nvwa.va_mapper
+		/* framework */
+		force nvwa.np_authz2
+		force nvwa.np_authz2_api
+		force nvwa.np_authz2_impl
+		force nvwa.np_blob
+		force nvwa.np_dataengine
+		force nvwa.np_definition
+		force nvwa.np_i18n
+		force nvwa.np_licence
+		force nvwa.np_log
+		force nvwa.np_log_log4j2
+		force nvwa.np_message
+		force nvwa.np_sql
+		force nvwa.np_sql_spring
+		// force nvwa.nr_file
+		// force nvwa.nvwa_auth
+		// force nvwa.nvwa_auth_impl
+		// force nvwa.nvwa_auth_proxy
+		// force nvwa.nvwa_auth_role
+		// force nvwa.nvwa_dataextract
+		// force nvwa.nvwa_dataextract_impl
+		// force nvwa.nvwa_login
+		// force nvwa.nvwa_nlpr
+		// force nvwa.nvwa_nros
+		// force nvwa.nvwa_portal
+		// force nvwa.nvwa_ticket
+		// force nvwa.va_datamodel_core
+		// force nvwa.va_datamodel_exchange
+		// force nvwa.va_datamodel_feign
+		/* utils */
+		// force nvwa.np_lib
+		// force nvwa.va_domain_common
+		// force nvwa.va_feign_common
+		/* bap */
+		// force nvwa.bap_basedata_core
+		// force nvwa.bap_basedata_exchange
+		// force nvwa.bap_basedata_feign
+		// force nvwa.bap_data_model_manage
+		// force nvwa.bap_nvwa_auth
+		// force nvwa.bap_nvwa_auth_proxy
+		// force nvwa.bap_nvwa_auth_role
+		// force nvwa.bap_nvwa_data_adapter
+		// force nvwa.bap_nvwa_portal
+		// force nvwa.bap_org_core
+		// force nvwa.bap_org_exchange
+		// force nvwa.bap_org_feign
+		/* products */
+		// force nvwa.nvwa_service
+		/* tenant */
+		// force nvwa.np_tenant
+
+		/* gov */
+		force gov.common_advanced_query
+		force gov.common_advanced_query_hb
+		force gov.common_base
+		force gov.common_biztype
+		force gov.common_context
+		force gov.common_context_np
+		force gov.common_context_nvwa
+		force gov.common_metadata
+		force gov.common_metadata_bean
+		force gov.common_metadata_resources
+		force gov.common_sequence
+		force gov.common_sequence_hb
+		force gov.common_serial
+		force gov.common_starter_store
+		force gov.common_starter_store_nvwa
+		force gov.common_store_core
+		force gov.common_store_hb
+		force gov.common_store_npsql
+		force gov.common_syntax
+		force gov.common_type
+		force gov.common_type_support_javascript
+		force gov.common_type_support_json
+		// force gov.gms_basedata
+		// force gov.gms_basic
+		force gov.gms_bill
+		force gov.gms_dev
+
+		/* amino */
+		force mk.amino_amqp
+		force mk.amino_boot
+		force mk.amino_boot_web
+		force mk.amino_common
+		force mk.amino_core
+		force mk.amino_dev
+		force mk.amino_tenant
+		force mk.amino_tenant_liquibase
+
+		/* bcp */
+		force mk.bcp_type
+		force mk.bcp_type_dev
+		force mk.bcp_type_support_json
+
+		force mk.bcp_store
+		force mk.bcp_store_tenant
+		force mk.mk_starter_store
+		force mk.mk_starter_store_nvwa
+		force mk.mk_starter_store_tenant
+
+		force mk.bcp_advanced_query
+		force mk.bcp_advanced_query_dev
+		force mk.bcp_script
+		force mk.bcp_serial
+		force mk.bcp_serial_dev
+
+		/* bap2 */
+		force mk.bap2_bill
+		force mk.bap2_bill_dev
+
+		/* excludes */
+		exclude group: "dom4j", module: "dom4j"
+		exclude group: "com.vaadin.external.google", module: "android-json"
+		exclude group: "ch.qos.logback", module: "logback-classic"
+		exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
+		exclude group: "javax.persistence", module: "persistence-api"
+	}
+}
+
+compileJava.options*.compilerArgs = [
+	"-Xlint:serial", "-Xlint:varargs", "-Xlint:cast", "-Xlint:classfile",
+	"-Xlint:dep-ann", "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally",
+	"-Xlint:overrides", "-Xlint:path", "-Xlint:processing", "-Xlint:static",
+	"-Xlint:try", "-Xlint:fallthrough", "-Xlint:rawtypes", "-Xlint:deprecation",
+	"-Xlint:unchecked", "-Xlint:-options"
+]
+
+compileTestJava.options*.compilerArgs = [
+	"-Xlint:serial", "-Xlint:-varargs", "-Xlint:cast", "-Xlint:classfile",
+	"-Xlint:dep-ann", "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally",
+	"-Xlint:overrides", "-Xlint:path", "-Xlint:processing", "-Xlint:static",
+	"-Xlint:try", "-Xlint:-fallthrough", "-Xlint:-rawtypes", "-Xlint:-deprecation",
+	"-Xlint:-unchecked", "-Xlint:-options"
+]
+
+compileJava {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	options.encoding = 'UTF-8'
+	options.compilerArgs += "-parameters"
+}
+
+test {
+	exclude "**/*TestSuite.class"
+	systemProperty("java.awt.headless", "true")
+	useJUnitPlatform()
+}
+
+eclipse {
+	classpath {
+		downloadJavadoc = true
+		downloadSources = true
+	}
+}
+
+idea {
+	module {
+		downloadJavadoc = true
+		downloadSources = true
+	}
+}
+
+dependencies {
+	implementation lib.jpa
+	implementation lib.slf4j_api
+	implementation lib.log4j_web
+
+	compileOnly lib.findbug_jsr305
+
+	testImplementation lib.junit5_jupiter_api
+	testImplementation lib.junit5_platform_runner
+	testImplementation lib.mockito_core
+	testImplementation lib.mockito_junit_jupiter
+	testImplementation lib.h2
+	testImplementation lib.spring_boot_starter_test
+	testImplementation lib.spring_boot_starter_log4j2
+
+
+	testCompileOnly lib.findbug_jsr305
+
+	testRuntimeOnly lib.junit5_jupiter_engine
+	testRuntimeOnly lib.junit5_platform_launcher
+	testRuntimeOnly lib.junit5_vintage_engine
+}

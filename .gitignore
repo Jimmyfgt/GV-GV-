@@ -1,0 +1,13 @@
+bin/
+classes/
+build/
+target/
+.gradle/
+.settings/
+.project
+.classpath
+*.bak
+.DS_Store
+application.yml
+log4j2.xml
+/log/

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<Configuration status="INFO" monitorInterval="5" packages="com.jiuqi.np.log.log4j2.appender"> 
+ 	<properties>
+        <!--设置日志在硬盘上输出的目录-->
+        <property name="logPath">log</property>
+        <property name="historyLogPath">log/history</property>
+    </properties>
+	<Appenders> 
+		<Console name="SysConsole" target="SYSTEM_OUT">
+			<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+		    <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/> 
+			<PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/> 
+		</Console>
+		
+         <!--日志文件滚动更新,这个会打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <RollingFile name="RollingFile" fileName="${logPath}/server.log"
+                     filePattern="${historyLogPath}/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss.SSS} [%t] %-5p %c{36} - %msg%n"/>
+            <Policies>  
+            <!-- 每1天更新一次，此处查阅网上和官方示例中，都是以小时出现，我测试是以天为单位。（官方文档中说明按item类型是否是小时，但没找到在哪里设置item类型）另有其他各类型策略，请参阅官方文档 --> 
+			<!-- TimeBasedTriggeringPolicy需要和filePattern配套使用，由于filePattern配置的时间最小粒度是dd天，所以表示每一天新建一个文件保存日志。SizeBasedTriggeringPolicy表示当文件大小大于指定size时，生成新的文件保存日志。 --> 
+                <TimeBasedTriggeringPolicy modulate="true"  interval="1" />  
+                <!-- 此处为每个文件大小策略限制，使用它一般会在文件中filePattern采用%i模式 -->  
+                <SizeBasedTriggeringPolicy size="10M" />
+            </Policies>
+            <!-- 最多备份30天以内的日志，此处为策略限制，Delete中可以按自己需要用正则表达式编写 -->  
+       		<!-- DefaultRolloverStrategy字段中加入max=“30”经测试是配合SizeBasedTriggeringPolicy限制%i的存在数量，并没有发现是网上流传的是最多保存多少个文件的限制，也或许是我写的有问题 -->  
+         	<!-- <DefaultRolloverStrategy>  
+        		<Delete basePath="log/$${date:yyyy-MM}" maxDepth="1">  
+                     <IfFileName glob="app-*.log.gz" />  
+                     <IfLastModified age="30d" />  
+           		</Delete>  
+            </DefaultRolloverStrategy> -->
+        </RollingFile>
+        
+        <!--设置级别为ERROR日志输出到error.log中-->
+        <RollingFile name="ErrorRollingFile" filename="${logPath}/error.log"
+                     filepattern="${historyLogPath}/$${date:yyyy-MM}/%d{YYYYMMdd}-%i-error.log.zip">
+            <!--设置只输出级别为ERROR的日志-->
+            <ThresholdFilter level="ERROR"/>
+            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss.SSS} [%t] %C:%M:%L - %msg%n" />
+            <Policies>
+                <!--设置每天打包日志一次-->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!--设置日志文件满1MB后打包-->
+                <SizeBasedTriggeringPolicy size="10M" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingFile>
+        
+	</Appenders> 
+	
+ 	<Loggers>
+		<!-- 系统日志记录器。使用异步logger输出到文件。 -->
+		<asyncRoot level="INFO" includeLocation="false">
+            <appender-ref ref="RollingFile"/>
+            <appender-ref ref="SysConsole"/>
+            <appender-ref ref="ErrorRollingFile"/>
+        </asyncRoot>
+	</Loggers>
+</Configuration>

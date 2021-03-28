@@ -1,0 +1,65 @@
+buildscript {
+	repositories {
+		maven {
+			url mavenRepoUrl
+			allowInsecureProtocol = mavenAllowInsecureProtocol
+			credentials {
+				username mavenUsername
+				password mavenPassword
+			}
+		}
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.3.4.RELEASE"
+	}
+}
+
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+apply from: "./common.gradle"
+apply from: "./repository.gradle"
+apply from: "./publish.gradle"
+
+war {
+	archiveBaseName = 'web.war'
+}
+
+
+dependencies {
+
+	/* spring */
+	implementation lib.spring_boot_starter_log4j2
+	implementation lib.spring_boot_starter_web
+
+	/* db */
+	implementation lib.mysql_connector
+
+	/* libs */
+	implementation lib.disruptor
+
+	/* spring boot */
+	providedRuntime lib.spring_boot_starter_tomcat
+
+
+	implementation lib.spring_orm
+
+	// https://mvnrepository.com/artifact/org.apache.shiro/shiro-core
+	implementation group: 'org.apache.shiro', name: 'shiro-core', version: '1.4.0'
+
+
+	implementation lib.hibernate_core
+	implementation lib.hikari
+
+	implementation lib.hibernate_validator
+
+
+
+
+
+
+
+
+}

@@ -1,0 +1,45 @@
+debug: false
+
+server: 
+  # 配置服务端口
+  port: 8095
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: practice-demo
+  datasource:
+    name: practice_ds
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/practice?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    driverClassName: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    # 配置使用kikari连接池
+    hikari: 
+      minimum-idle: 10
+      maximum-pool-size: 50
+
+# Hibernate配置
+hibernate:
+  # 包扫描路径
+  #packagesToScan:
+  #  - com.beecode.bap.scheduler.entity
+  # HBM文件路径
+  mappingLocations:
+    - classpath*:/config/*.hbm.xml
+    # 如果部署的数据库允许使用binary(16)作为主键和索引，则HBM文件路径需要使用 classpath*:/config/hbm/*.hbm.xml
+    # 如果部署的数据库不允许使用binary(16)作为主键和索引，则HBM文件路径需要使用 classpath*:/config/hbm2/*.hbm.xml
+    - classpath*:/config/hbm/*.hbm.xml
+    - classpath*:/config/system/*.hbm.xml
+    - classpath*:/config/system/hbm/*.hbm.xml
+  # Hibernate属性设置
+  properties:
+    # hibernate.hbm2ddl.auto可以设置为:
+    #   update: 由hibernate来维护表结构
+    #   none: hibernate不维护表结构，由外部来做表结构的维护
+    # 一般生产环境应设为none
+    hibernate.hbm2ddl.auto: update
+    # 是否打印hibernate执行的sql语句
+    hibernate.show_sql: true

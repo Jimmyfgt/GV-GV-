@@ -1,0 +1,23 @@
+repositories {
+	if ("jcenter".equals(mavenRepo)) {
+		jcenter()
+	} else if ("mavenCentral".equals(mavenRepo)) {
+		mavenCentral()
+	} else if ("ali".equals(mavenRepo)) {
+		maven {
+			url aliRepoUrl
+		}
+	} else if ("local".equals(mavenRepo)) {
+		maven {
+			url mavenRepoUrl
+			allowInsecureProtocol = mavenAllowInsecureProtocol
+			credentials {
+				username mavenUsername
+				password mavenPassword
+			}
+		}
+	} else {
+		// default
+		jcenter()
+	}
+}
